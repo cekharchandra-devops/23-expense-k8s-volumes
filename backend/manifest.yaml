@@ -40,7 +40,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: backend-configmap
-                  value: DB_HOST
+                  key: DB_HOST
 ---
 apiVersion: v1
 kind: Service
