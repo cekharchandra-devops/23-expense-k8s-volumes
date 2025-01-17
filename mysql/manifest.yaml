@@ -55,14 +55,14 @@ spec:
         - name: mysql
           image: cekharch/mysql:v7
           volumeMounts:
-            - name: ebs-dynamic-cliam
+            - name: mysql
               mountPath: /var/lib/mysql
   volumeClaimTemplates:
   - metadata:
       name: mysql
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "expense-ebs"
+      storageClassName: "expense-sc"
       resources:
         requests:
           storage: 1Gi
