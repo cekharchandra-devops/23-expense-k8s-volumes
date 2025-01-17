@@ -58,9 +58,10 @@ spec:
   serviceName: mysql-headless
   template:
     metadata:
-      env: prod
-      component: mysql
-      tier: db
+      labels:
+        env: prod
+        component: mysql
+        tier: db
     containers:
       - name: mysql
         image: cekharch/mysql:v7
