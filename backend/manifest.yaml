@@ -5,8 +5,8 @@ metadata:
   namespace: expense
   labels:
     project: expense
-    component: mysql
-    tier: db
+    component: backend
+    tier: backend
 data:
   DB_HOST: "mysql"
 ---
@@ -16,21 +16,21 @@ metadata:
   name: backend
   labels:
     project: expense
-    component: mysql
-    tier: db
+    component: backend
+    tier: backend
 spec:
   replicas: 3
   selector:
     matchLabels:
       project: expense
-      component: mysql
-      tier: db
+      component: backend
+      tier: backend
   template:
     metadata: 
       labels:
         project: expense
-        component: mysql
-        tier: db
+        component: backend
+        tier: backend
     spec:
       containers:
         - name: backend
@@ -49,13 +49,13 @@ metadata:
   namespace: expense
   labels:
     project: expense
-    component: mysql
-    tier: db
+    component: backend
+    tier: backend
 spec:
   selector:
     project: expense
-    component: mysql
-    tier: db
+    component: backend
+    tier: backend
   ports:
     - name: backend
       port: 8080
