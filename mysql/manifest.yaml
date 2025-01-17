@@ -62,12 +62,13 @@ spec:
         env: prod
         component: mysql
         tier: db
-    containers:
-      - name: mysql
-        image: cekharch/mysql:v7
-        volumeMounts:
-          - name: ebs-dynamic-cliam
-            mountPath: /var/lib/mysql
+    spec:
+      containers:
+        - name: mysql
+          image: cekharch/mysql:v7
+          volumeMounts:
+            - name: ebs-dynamic-cliam
+              mountPath: /var/lib/mysql
   volumeClaimTemplates:
     - metadata:
         name: ebs-dynamic-cliam
