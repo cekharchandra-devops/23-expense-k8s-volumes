@@ -51,9 +51,10 @@ metadata:
 spec:
   replicas: 2
   selector:
-    env: prod
-    component: mysql
-    tier: db
+    matchLabels:
+      env: prod
+      component: mysql
+      tier: db
   serviceName: mysql-headless
   template:
     metadata:
