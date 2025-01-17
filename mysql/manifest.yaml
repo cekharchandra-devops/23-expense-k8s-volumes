@@ -67,12 +67,12 @@ spec:
           - name: ebs-dynamic-cliam
             mountPath: /var/lib/mysql
   volumeClaimTemplates:
-    metadata:
-      name: ebs-dynamic-cliam
-    spec:
-      storageClassName: "ebs-sc"
-      accessModes:
-        - "ReadWriteOnce"
-      storage:
-        capacity: 1Gi
+    - metadata:
+        name: ebs-dynamic-cliam
+      spec:
+        storageClassName: "ebs-sc"
+        accessModes:
+          - "ReadWriteOnce"
+        storage:
+          capacity: 1Gi
 
