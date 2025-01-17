@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: cekharch/mysql:v2.1
+        image: cekharch/mysql:v2.2
         volumeMounts:
         - name: mysql
           mountPath: /var/lib/mysql
