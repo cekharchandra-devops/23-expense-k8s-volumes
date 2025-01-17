@@ -3,10 +3,6 @@ kind: Service
 metadata:
   name: mysql-headless
   namespace: expense
-  labels:
-    env: prod
-    component: mysql
-    tier: db
 spec:
   clusterIP: None
   selector:
@@ -14,9 +10,9 @@ spec:
     component: mysql
     tier: db
   ports:
-    - name: mysql-headless
-      port: 3306
+    - port: 3306
       targetPort: 3306
+      protocol: TCP
 
 ---
 apiVersion: v1
@@ -24,19 +20,15 @@ kind: Service
 metadata:
   name: mysql
   namespace: expense
-  labels:
-    env: prod
-    component: mysql
-    tier: db
 spec:
   selector:
     env: prod
     component: mysql
     tier: db
   ports:
-    - name: mysql
-      port: 3306
+    - port: 3306
       targetPort: 3306
+      protocol: TCP
 
 ---
 apiVersion: apps/v1
@@ -44,10 +36,6 @@ kind: StatefulSet
 metadata:
   name: mysql
   namespace: expense
-  labels:
-    env: prod
-    component: mysql
-    tier: db
 spec:
   replicas: 2
   selector:
@@ -55,7 +43,7 @@ spec:
       env: prod
       component: mysql
       tier: db
-  serviceName: mysql-headless
+  serviceName: "mysql-headless"
   template:
     metadata:
       labels:
@@ -70,13 +58,12 @@ spec:
             - name: ebs-dynamic-cliam
               mountPath: /var/lib/mysql
   volumeClaimTemplates:
-    - metadata:
-        name: ebs-dynamic-cliam
-      spec:
-        storageClassName: "ebs-sc"
-        accessModes:
-          - "ReadWriteOnce"
-        resources:
-          requests:
-            capacity: 1Gi
+  - metadata:
+      name: mysql
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "expense-ebs"
+      resources:
+        requests:
+          storage: 1Gi
 
